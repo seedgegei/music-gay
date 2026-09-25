@@ -20,6 +20,12 @@
 
 ## 快速开始
 
+### 在线使用
+
+**[打开音乐转调工具 →](https://seedgegei.github.io/music-gay/)**
+
+使用新版 Edge 或 Chrome 打开即可，无需安装 Python。页面由 GitHub Pages 提供，音乐仍只在你的浏览器中处理，不会上传。首次打开需要网络加载程序。
+
 ### Windows：下载后双击
 
 1. 点击仓库 **Code → Download ZIP**，解压到本地文件夹。
@@ -86,6 +92,8 @@ python scripts/package.py
 ```
 
 打包结果位于 `release/music-gay-1.0.0-portable.zip`，附 SHA-256 校验文件。GitHub Actions 在 Windows 和 Linux 上检查构建、音频引擎、Worker、本地启动器及打包流程，并上传便携包作为构建产物。**自动检查不代替真实浏览器的听感、交互或文件格式兼容性验证。**
+
+推送到 `main` 后，以上检查全部通过才会将 `dist/` 部署到 GitHub Pages；Pull Request 只执行检查。也可以从 Actions → CI → Run workflow 手动重新发布 `main`。
 
 ```text
 src/                          页面模板、样式、浏览器逻辑与音频处理

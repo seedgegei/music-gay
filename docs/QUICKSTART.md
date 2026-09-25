@@ -2,6 +2,12 @@
 
 ## 打开程序
 
+### 在线使用
+
+在新版 Edge 或 Chrome 打开 **[音乐转调工具](https://seedgegei.github.io/music-gay/)**，无需安装。首次打开需要网络加载页面，之后转调、试听和导出均在浏览器本地完成，音乐不会上传。
+
+### 本地使用
+
 Windows 需要 Python 3.10 或以上，然后双击「启动音乐转调.cmd」。启动器会优先在 Edge 中打开程序；找不到 Edge 时使用默认浏览器。
 
 - 从 GitHub 下载的仓库：保留目录结构，启动器读取 `dist/index.html`。

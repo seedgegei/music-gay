@@ -37,7 +37,19 @@ python scripts/package.py
 
 输出目录 `release/` 不提交到 Git。ZIP 含中文 HTML、Windows 启动脚本、Python 启动器、使用说明、许可、第三方说明与对应引擎源码。ZIP 文件顺序、时间戳与权限固定，便于相同工具链下重复构建；附带 SHA-256 校验文件。
 
-包版本来自 `package.json`。更新版本时同步 `CHANGELOG.md` 与 README 中的包名。CI 会上传便携包；维护者可从成功的 Actions 运行中下载。项目不会自动对外发布网站或更改仓库访问权限。
+包版本来自 `package.json`。更新版本时同步 `CHANGELOG.md` 与 README 中的包名。CI 会上传便携包；维护者可从成功的 Actions 运行中下载。
+
+## GitHub Pages 发布
+
+在线地址：<https://seedgegei.github.io/music-gay/>。
+
+仓库 Settings → Pages → Build and deployment → Source 使用 **GitHub Actions**。`.github/workflows/ci.yml` 在 `main` 的 Windows 和 Linux 检查全部通过后，发布已验证与源码一致的 `dist/`。Pull Request 不会触发部署。
+
+页面是单文件应用，资源均内嵌，不需要配置 `/music-gay/` 资源前缀或运行 Python 服务。Pages 只提供静态页面，音频处理和导出仍发生在访问者的浏览器中。
+
+发布使用 `github-pages` environment；只有部署 job 获得 `pages: write` 和 `id-token: write` 权限，Actions 固定到提交 SHA。同一时间只运行一个部署，新的推送不会中断进行中的发布。需要手动重新发布时，从 Actions → CI → Run workflow 选择 `main`。
+
+排查部署时先查看 CI 中的 **Deploy GitHub Pages** job，再确认 Pages 的 Source 和 environment 分支限制允许 `main`。仅 `dist/` 会成为网站内容，本地启动器和仓库文档不会作为网站文件上传。
 
 ## 发布前的人工检查
 
