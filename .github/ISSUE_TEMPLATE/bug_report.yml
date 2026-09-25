@@ -1,0 +1,24 @@
+name: 问题反馈
+description: 启动、转调、试听或导出遇到问题
+title: "[Bug] "
+body:
+  - type: textarea
+    id: environment
+    attributes:
+      label: 使用环境
+      description: 操作系统、浏览器及版本、Python 版本、启动方式。
+      placeholder: Windows 11 / Edge / 双击启动脚本
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 复现步骤、预期结果与实际结果
+      description: 请附页面错误文字；优先使用内置示例复现，不要提交私人音频。
+    validations:
+      required: true
+  - type: textarea
+    id: audio
+    attributes:
+      label: 音频参数（可选）
+      description: 格式、大小、时长、声道、升降半音数。无需上传整首歌曲。

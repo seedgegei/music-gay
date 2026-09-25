@@ -1,0 +1,25 @@
+{
+	"name": "@echogarden/rubberband-wasm",
+	"version": "0.2.0",
+	"description": "Rubber Band library, compiled to WASM. Intended for use with Echogarden.",
+	"publishConfig": {
+		"access": "public"
+	},
+	"main": "rubberband.js",
+	"type": "module",
+	"files": [
+		"rubberband.js",
+		"rubberband.wasm",
+		"COPYING",
+		"README.md"
+	],
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Echogarden project",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/echogarden-project/rubberband-wasm"
+	},
+	"license": "GPL-2.0-only"
+}

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>移调 · 保留音色的音乐转调工具</title>
+<meta name="description" content="在本地给音乐升降调，保留音色与原速，对比试听并导出 WAV。">
+<meta name="theme-color" content="#121516">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ffb66d'/%3E%3Cpath d='M20 39V21m12 27V15m12 24V25' stroke='%23121516' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>/* STYLE */</style></head><body>
+<div class="shell">
+<header><a class="brand" href="#" aria-label="移调首页"><span class="brand-mark" aria-hidden="true">♮</span><span>移调 <small>PITCH ROOM</small></span></a><span class="local-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="4" y="9" width="16" height="12" rx="3"/><path d="M8 9V6a4 4 0 0 1 8 0v3"/></svg>音乐只在本地处理</span></header>
+<main>
+<div class="heading"><div><p class="eyebrow">音乐工作台</p><h1>找到适合你的调。</h1><p>改变音高，保留原来的声音质感与速度。</p></div><span class="version">FORMANT PRESERVED</span></div>
+<div class="workspace">
+<section class="track panel" aria-labelledby="track-title">
+  <div class="section-head"><h2 id="track-title"><span class="step">01</span>音乐文件</h2><button id="replace" class="text-button" hidden>更换文件</button></div>
+  <input id="file" type="file" accept="audio/*,.mp3,.wav,.flac,.m4a,.ogg,.aac" hidden>
+  <div id="dropzone" class="dropzone">
+    <div class="upload-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 21V5m-6 6 6-6 6 6M5 21v5h22v-5"/></svg></div>
+    <h3>把音乐拖到这里</h3><p>MP3、WAV、FLAC、M4A 等浏览器支持的格式</p>
+    <button id="choose" class="light-button">选择音乐文件</button>
+    <span class="limit">单个文件 ≤ 100 MB · 时长 ≤ 10 分钟</span>
+  </div>
+  <div id="loaded" hidden>
+    <div class="file-row"><div class="file-symbol" aria-hidden="true">♫</div><div class="file-info"><h3 id="filename"></h3><p id="filemeta"></p></div><span class="tag" id="filetag">已载入</span></div>
+    <div class="wave-container"><canvas id="wave" aria-label="音频波形"></canvas><div class="wave-playhead" id="playhead"></div><div class="wave-label">AUDIO WAVEFORM</div></div>
+    <div class="timeline"><span>0:00</span><span id="middle-time"></span><span id="total-time"></span></div>
+    <div class="transport"><button id="play" class="play-button" aria-label="播放" disabled>▶</button><span class="time"><span id="current-time">0:00</span><span class="time-divider"> / </span><span id="duration">0:00</span></span><div class="compare" role="group" aria-label="试听版本"><button id="original" aria-pressed="true">原曲</button><button id="processed" aria-pressed="false" disabled>转调后</button></div></div>
+    <label class="sr-only" for="seek">播放进度</label><input id="seek" type="range" min="0" max="1000" value="0" class="seek" disabled>
+  </div>
+  <div class="track-foot"><span id="track-hint">没有手边的音乐？</span><button id="demo" class="text-button">试用一段示例 <span aria-hidden="true">↗</span></button></div>
+</section>
+<section class="pitch panel" aria-labelledby="pitch-title">
+  <div class="section-head"><h2 id="pitch-title"><span class="step">02</span>调整音高</h2><button id="reset" class="text-button">重置</button></div>
+  <div class="pitch-dial"><button id="minus" class="step-button" aria-label="降低一个半音">−</button><div><output id="pitch-value" for="pitch-slider">0</output><span id="pitch-caption">原调 · 半音</span></div><button id="plus" class="step-button" aria-label="升高一个半音">＋</button></div>
+  <label class="sr-only" for="pitch-slider">升降调半音数</label><input id="pitch-slider" type="range" min="-12" max="12" step="1" value="0"><div class="range-labels"><span>−12 降八度</span><span>+12 升八度</span></div>
+  <div class="presets" role="group" aria-label="常用转调幅度"><button data-pitch="-3">−3</button><button data-pitch="-2">−2</button><button data-pitch="0" aria-pressed="true">原调</button><button data-pitch="2">+2</button><button data-pitch="3">+3</button></div>
+  <div class="fixed-settings"><div><span>音色保留</span><strong><span aria-hidden="true">✓ </span>始终开启</strong></div><div><span>播放速度</span><strong>1.00× <span class="muted">原速</span></strong></div></div>
+  <button id="render" class="primary" disabled>生成转调音频 <span aria-hidden="true">↗</span></button><button id="cancel" class="text-button cancel" hidden>取消处理</button>
+  <div id="progress-wrap" hidden><progress id="progress" max="100" value="0" aria-label="转调处理进度"></progress></div>
+  <p id="status" class="status" role="status" aria-live="polite">先选择一首音乐，再调整音高。</p>
+</section>
+</div>
+<section class="export panel" aria-labelledby="export-title"><div class="export-icon" aria-hidden="true">↓</div><div class="export-copy"><h2 id="export-title">导出你的新版本</h2><p id="export-info">WAV · 24-bit PCM · 保持原速与时长</p></div><button id="download" class="export-button" disabled>下载 WAV <span aria-hidden="true">↓</span></button></section>
+<div class="note"><span aria-hidden="true">ⓘ</span><p>音色保留会补偿共振峰，尽量维持人声和乐器的自然质感。转调幅度较大时，仍可能出现音色变化；建议先试听再导出。</p></div>
+</main><footer><span>为你的声音，留一点自由。</span><button id="about" class="text-button">关于音频引擎</button></footer>
+</div>
+<dialog id="about-dialog"><h2>音频引擎与开源许可</h2><p>使用 Rubber Band R3 高品质引擎，启用 FormantPreserved，时间比例固定为 1。音乐在当前浏览器内处理，不上传音频。</p><p>Rubber Band © Particular Programs Ltd；WASM 构建来自 Echogarden。此程序以 GPL-2.0-only 提供。</p><p><a href="https://breakfastquay.com/rubberband/" target="_blank" rel="noreferrer">Rubber Band 项目</a> · <a id="source-download" href="#">下载引擎源码</a> · <a id="license-download" href="#">下载许可文本</a></p><button id="close-about" class="light-button">关闭</button></dialog>
+<script id="engine-source" type="text/plain">/* ENGINE */</script>
+<script id="wasm-data" type="text/plain">/* WASM */</script>
+<script id="dsp-source" type="text/plain">/* DSP */</script>
+<script id="worker-source" type="text/plain">/* WORKER */</script>
+<script id="license-text" type="text/plain">/* LICENSE */</script>
+<script id="source-archive" type="text/plain">/* SOURCE_ARCHIVE */</script>
+<script>/* APP */</script>
+</body></html>

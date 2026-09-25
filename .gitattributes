@@ -1,0 +1,10 @@
+* text=auto eol=lf
+*.cmd text eol=crlf
+*.wasm binary
+*.tar.gz binary
+*.png binary
+*.zip binary
+vendor/rubberband/rubberband.js -text
+vendor/rubberband/COPYING -text
+dist/index.html linguist-generated=true -whitespace
+vendor/** linguist-vendored=true -whitespace

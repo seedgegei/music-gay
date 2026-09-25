@@ -1,0 +1,18 @@
+{
+  "name": "music-gay",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local music pitch shifting with Rubber Band R3 formant preservation.",
+  "license": "GPL-2.0-only",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "repository": { "type": "git", "url": "https://github.com/seedgegei/music-gay.git" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "node --test tests/audio.test.mjs tests/worker.test.mjs",
+    "test:launcher": "python -m unittest discover -s tests -p test_*.py -v",
+    "start": "python music_transposer_server.py",
+    "package": "python scripts/package.py"
+  }
+}
