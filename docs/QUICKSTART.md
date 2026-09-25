@@ -35,4 +35,6 @@ Windows 需要 Python 3.10 或以上，然后双击「启动音乐转调.cmd」�
 
 输出固定为 48 kHz、24-bit WAV。与相同时长的 16-bit WAV 相比，体积约大 50%。音色保留尽量减轻“变尖、变闷”的感觉，但不能保证完全不变。大幅升降调建议先试听。
 
+想了解文件为何变大、如何估算大小，以及为何听感可能相近，请阅读 [导出文件说明](https://github.com/seedgegei/music-gay/blob/main/docs/EXPORT_SIZE.md)。
+
 遇到问题请查看仓库的 [故障排查](https://github.com/seedgegei/music-gay/blob/main/docs/TROUBLESHOOTING.md)。

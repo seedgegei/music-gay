@@ -69,7 +69,7 @@ python music_transposer_server.py --port 18888
 
 **为什么导出的 WAV 比原文件大？** WAV PCM 不使用有损压缩。同样采样率、声道和时长下，24-bit 的体积是 16-bit 的 **1.5 倍**；从 MP3 导出 WAV 的增幅通常更大。文件变大不代表听感按比例提升，也不是共振峰保留必须付出的存储成本。当前界面尚未提供 16-bit 或 MP3 导出选项。
 
-更多说明：[使用指南](docs/QUICKSTART.md) · [音频原理与限制](docs/AUDIO.md) · [故障排查](docs/TROUBLESHOOTING.md)
+更多说明：[使用指南](docs/QUICKSTART.md) · [导出文件为什么会变大](docs/EXPORT_SIZE.md) · [音频原理与限制](docs/AUDIO.md) · [故障排查](docs/TROUBLESHOOTING.md)
 
 ## 隐私与运行方式
 
